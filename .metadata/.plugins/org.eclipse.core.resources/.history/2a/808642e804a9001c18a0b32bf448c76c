@@ -1,0 +1,5 @@
+package com.greenrecipe.main.mybatis.member;
+
+public interface MemberMapper {
+
+}

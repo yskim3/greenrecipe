@@ -1,0 +1,30 @@
+package com.greenrecipe.main;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+public class GreenrecipeController {
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home() {
+		return "index";
+	}
+	
+	// 임시 controller
+	
+	@GetMapping("index")
+	public String index() {
+		return "index";
+	}
+	
+	@GetMapping("member/login")
+	public String login() {
+		return "member/login";
+	}
+	
+	
+	
+}

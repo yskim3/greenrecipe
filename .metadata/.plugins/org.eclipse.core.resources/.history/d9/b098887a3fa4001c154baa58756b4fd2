@@ -1,0 +1,30 @@
+package com.greenrecipe.main;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+
+@ComponentScan
+@Configuration
+@EnableAutoConfiguration
+// @SpringBootApplication
+public class GreenrecipeApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(GreenrecipeApplication.class, args);
+	}
+	
+	@Bean
+	public InternalResourceViewResolver setupViewRwsolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setprefix("");
+		resolver.setprefix("");
+		return rewolver;
+	}
+	
+}

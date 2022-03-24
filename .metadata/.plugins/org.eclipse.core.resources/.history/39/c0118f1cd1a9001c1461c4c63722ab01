@@ -1,0 +1,37 @@
+package com.greenrecipe.main.mybatis.member;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+
+import com.greenrecipe.main.member.dto.BuyerDTO;
+
+@Mapper
+public interface MemberMapper {
+	
+	private int buyer_num;
+	private String buyer_id;
+	private String buyer_email;
+	private String buyer_password;
+	private String buyer_name;
+	private String buyer_code;
+	private String buyer_addr;
+	private String buyer_phone;
+	private String buyer_grade;
+	private String buyer_hash;
+	private String buyer_cart;
+	private int buyer_point;
+	private String buyer_coupon;
+	seq_member.nextval,#{id},#{pw},#{name},#{division}
+	
+	buyer_num, buyer_id, buyer_email, buyer_password, buyer_name, buyer_code, buyer_addr, buyer_phone, buyer_grade, buyer_hash, buyer_cart, buyer_point, buyer_coupon
+	
+	@Insert("INSERT INTO buyer (buyer_num, buyer_id, buyer_email, buyer_password, buyer_name, buyer_code, buyer_addr, buyer_phone, buyer_grade, buyer_hash, buyer_cart, buyer_point, buyer_coupon)" +
+			"VALUE(buyer_seq.nextval, #{buyer_id}, #{buyer_email}, #{buyer_password}, #{buyer_name}, #{buyer_code}, #{buyer_addr}, #{buyer_phone}, #{buyer_grade}, #{buyer_hash}, #{buyer_cart}, #{buyer_point}, #{buyer_coupon})")
+	
+	
+	public BuyerDTO buyerIdCheck(String buyer_id);
+	// public ArrayList<MemberDTO> memberInfo();
+	// public int register(MemberDTO dto);
+	// public void keepLogin(Map<String, Object> map);
+	// public BuyerDTO getUserSession(String sessionId);
+}

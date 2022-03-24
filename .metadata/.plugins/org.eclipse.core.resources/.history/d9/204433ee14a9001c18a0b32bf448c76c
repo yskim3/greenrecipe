@@ -1,0 +1,34 @@
+package com.greenrecipe.main.config;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@MapperScan("com.greenrecipe.main.mybatis.member.MemberMapper") // 마이바티스의 메퍼를 탐색
+public class DBConfig {
+
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.hikari")
+    public HikariConfig hikariConfig() {
+        return new HikariConfig();
+    }
+
+    @Bean
+    public DataSource dataSource() {
+        return new HikariDataSource(hikariConfig());
+    }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory() {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource());
+        try {
+            SqlSessionFactory factory=sqlSessionFactoryBean.getObject();
+            factory.getConfiguration().setMapUnderscoreToCamelCase(true);
+            return factory;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}

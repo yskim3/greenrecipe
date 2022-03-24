@@ -1,0 +1,23 @@
+package com.greenrecipe.main.mybatis.member;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.greenrecipe.main.member.dto.BuyerDTO;
+
+@Mapper
+public interface MemberMapper {
+	public int register(BuyerDTO buyerdto);
+
+	// test
+	public List<HashMap<String, Object>> buyerIdCheck() throws Exception;
+	//public BuyerDTO buyerIdCheck(String buyer_id);
+	
+	// public ArrayList<MemberDTO> memberInfo();
+	// public int register(MemberDTO dto); (작성함)
+	public void keepLogin(Map<String, Object> map);
+	public BuyerDTO getBuyerSession(String buyersessionId);
+}

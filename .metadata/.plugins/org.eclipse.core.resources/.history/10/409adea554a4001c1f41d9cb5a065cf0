@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="wrap">
+		<div class="header">
+			<h1 class="title">CARE LAB</h1>
+		</div>
+	</div>
+	<div class="navdiv">
+		<div class="wrap">
+			<nav>
+				<ul>
+					<li><a href="${contextPath}/index">HOME</a></li>
+					<li>
+						<c:choose>
+							<c:when test="${loginUser != null}">
+								<a href="${contextPath}/member/memberInfo">MEMBER_SHIP</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${contextPath}/member/login">MEMBER_SHIP</a>
+							</c:otherwise>
+						</c:choose>
+						<!-- <a href="${contextPath}/member/login">는 login이 안되어 있으면 login로 이동하라는 code -->
+					</li>
+					<!-- BOARD click시 BoardController.java의 /board/boardAllList (@GetMapping("boardAllList"))로 이동 -->
+					<li><a href="${contextPath}/board/boardAllList">BOARD</a></li>
+					<li>
+						<c:choose>
+							<c:when test="${loginUser != null}">
+								<a href="${contextPath}/member/logout">LOGOUT</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${contextPath}/member/login">LOGIN</a>
+							</c:otherwise>
+						</c:choose>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</body>
+</html>

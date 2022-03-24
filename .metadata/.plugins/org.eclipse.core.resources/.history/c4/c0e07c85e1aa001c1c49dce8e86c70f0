@@ -1,0 +1,16 @@
+package com.greenrecipe.main.member.service;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
+
+import com.greenrecipe.main.member.dto.BuyerDTO;
+
+public interface MemberService {
+	public int buyerIdCheck(HttpServletRequest req);
+	// public void memberInfo(Model model);
+	public void buyer_info(String buyer_id, Model model);
+	public int register(BuyerDTO buyerdto);
+	public void keepLogin(String buyer_sessionId, java.sql.Date buyer_limiteDate, String buyer_id);
+	public BuyerDTO BuyerSession(String buyer_sessionId);
+}

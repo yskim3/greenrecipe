@@ -1,0 +1,5 @@
+package com.greenrecipe.main.member.dto;
+
+public class BuyerDTO {
+
+}

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.care.root.mybatis.board.BoardMapper">
+
+	<!--
+	resultMap 작성
+	id="board"에서 이름은 board,
+	type="com.care.root.board.dto.BoardDTO"에서
+	resultMap id에 대한 type (자료형)은 BoardDTO 사용
+	(type=""의 ""안은 해당 file의 경로)
+	
+	resultMap 기능은
+	dto의 변수 (속성값)과 DB에 있는 column명을
+	matching시켜주는 작업 기능
+	
+	id property는 type="해당 file 경로"에서 해당 file의 int형 변수,
+	result property는 type="해당 file 경로"에서 해당 file의 String형 변수
+	
+	column=는 해당 file의 변수명에 해당하는 DB의 column명
+	
+	resultMap을 사용하는 이유는
+	합성어인 경우
+	database에서
+	합성어의 단어 중간에 _로 표현,
+	java에서
+	합성어의 두번째 단어의 첫 알파벳을 대문자로 표현
+	
+	만약 database에서 data를 가지고 왔을 때
+	database의 column명과 java의 변수명이 다르면 data를 못 넣어줌 (문제 발생)
+	
+	그래서 database에서 data를 가지고 왔을 때
+	database의 column명과 java의 변수명을 matching시켜주는 작업 통해
+	data를 넣어줄 수 있음 (문제 해결)
+	
+	예시
+	
+	<id property="writeNo" column="write_no"/>에서
+	
+	id property="writeNo"는 BoardDTO의 int writeNo,
+	column="write_no"는 DB의 write_no
+	-->
+	
+	<resultMap id="board" type="com.care.root.board.dto.BoardDTO">
+		<id property="writeNo" column="write_no"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="saveDate" column="savedate"/>
+		<result property="hit" column="hit"/>
+		<result property="imageFileName" column="image_file_name"/>
+		<result property="id" column="id"/>
+	</resultMap>
+
+	<resultMap id="reply" type="com.care.root.board.dto.BoardRepDTO">
+		<result property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="write_group" column="write_group"/>
+		<result property="write_date" column="write_date"/>
+	</resultMap>
+
+	<!--
+	Mapper.java의 method명과 Mapper.xml의 id명이 같아야 함
+	
+	Mapper.java와 Mapper.xml가 연동되기 때문
+	(이름이 서로 다르면 연동 불가능)
+	
+	예시
+	
+	Mapper.java의 method인 boardAllList와
+	Mapper.xml의 id인 boardAllList가 같음
+	-->
+	
+	<!--
+	<select id="boardAllList" resultMap="board">
+	</select>
+	-->
+	
+	<!-- <select> 사용시 무조건 resultMap 작성해야 함 -->
+	
+	<!--
+	<select>로 결과값을 얻어오고
+	resultMap 형태으로 얻어온 값을 받음
+	
+	<select>를 통해
+	연동한 database에서 data를
+	resultMap 형태로 mapping을 시켜서
+	return으로 반환
+	
+	연동한 database의 column은 java의 변수에 저장됨 (mapping 작업)
+	
+	예시
+	
+	<select id="boardAllList" resultMap="board">에서
+	select id="boardAllList"는 BoardMapper.java의 boardAllList()명
+	resultMap="board"는 board로 받음
+	board의 형태는 위의 <resultMap id="board" ...>임
+	-->
+	
+	<select id="boardAllList" resultMap="board">
+		select B.* from(
+		select rownum rn, A.* from(
+		select * from mvc_board order by write_no desc)A)B
+		where rn between #{s} and #{e}
+	</select>
+	
+	<!--
+	resultMap 기능은
+	dto의 변수 (속성값)과 DB에 있는 column명을
+	matching시켜주는 작업 기능
+	-->
+	
+	<!--
+	boardAllList의 query문
+	
+	select B.* from B
+	
+	B로부터 B.* (B의 모든 값) 가져옴
+	(rownum, 전체 data)
+	
+	select rownum rn, A.* from A
+	
+	select를 통해서
+	rownum (가상의 numbering을 붙여줌) 가져옴
+	(현재 database에 있는 data를 기준으로 number 생성)
+	
+	rownum rn에서 rownum의 별명은 rn
+	
+	rownum 사용이
+	write_no 사용보다
+	조금 더 안정적임
+	
+	write_no 통해서
+	글에 대한 개수를 가지고 올 수 없음
+	
+	write_no 사용시
+	중간에 삭제된 write_no가 있을 경우
+	글을 가지고 올 때 조금씩 문제 생김
+	
+	(select) A.* from A
+	A로부터 A.* (A의 모든 값) 가져옴
+	
+	select * from mvc_board order by write_no desc는
+	mvc_board에서 모든 data를 가져와서 내림차순으로 정렬
+	
+	(select * from mvc_board order by write_no desc)A
+	mvc_board에서 모든 data를 가져와서 내림차순으로 정렬한 값을 A로 사용
+	
+	where rn between #{s} and #{e}는
+	조건은 rownum이 s와 e 사이에 있는 값
+	
+	s는 start (글 시작 번호), BoardMapper.java에서 s 설정
+	e는 end (글 끝 번호), BoardMapper.java에서 e 설정
+	-->
+	
+	<insert id="writeSave">
+		insert into mvc_board(write_no, id, title, content, image_file_name)
+		values(mvc_board_seq.nextval, #{id}, #{title}, #{content}, #{imageFileName})
+	</insert>
+	
+	<select id="contentView" resultMap="board">
+		select * from mvc_board where write_no=#{writeNo}
+	</select>
+
+	<update id="modify">
+		update mvc_board
+		set title=#{title}, content=#{content}, image_file_name=#{imageFileName}
+		where write_no=#{writeNo}
+	</update>
+
+	<delete id="delete">
+		delete from mvc_board where write_no=#{writeNo}
+	</delete>
+
+	<insert id="addReply">
+		insert into reply(id, title, content, write_group)
+		values(#{id}, #{title}, #{content}, #{write_group})
+	</insert>
+
+	<select id="getRepList" resultMap="reply">
+		select * from reply
+		where write_group=#{write_group}
+		order by write_date desc
+	</select>
+
+	<select id="boardCount" resultType="Integer">
+		select count(*) from mvc_board
+	</select>
+
+	<select id="upHit">
+		update mvc_board set hit=hit+1 where write_no=#{writeNo}
+	</select>
+
+</mapper>

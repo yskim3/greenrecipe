@@ -1,0 +1,27 @@
+create table buyer ( -- 사용자에 대한 DB
+  buyer_num number(3), --  고유번호
+  buyer_id varchar2(20), 
+  buyer_email varchar2(50),
+  buyer_password varchar2(50),
+  buyer_name varchar2(20), 
+  buyer_code varchar2(50), 
+  buyer_addr  varchar2(150),
+  buyer_phone varchar2(50),
+  buyer_grade varchar2(10),
+  buyer_hash varchar2(100),
+  buyer_cart varchar2(100),
+  buyer_point number(30),
+  buyer_coupon varchar2(100)
+);
+
+create sequence buyer_seq;
+
+commit;
+
+create sequence buyer_seq;
+
+select * FROM buyer
+
+insert into buyer values(1, 'userid', 'user@email.com', '1234', 'uname', 'abcd', 'seoul', '010-1234-5678', '새싹', '(1, 2)', '(1)', 1000, '1');
+
+commit;

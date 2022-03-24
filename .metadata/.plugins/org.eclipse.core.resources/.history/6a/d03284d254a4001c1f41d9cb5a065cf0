@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>header</h1>
+	<div class="wrap">
+		<div class="header">
+			<h1 class="title">그린 레시피</h1>
+		</div>
+	</div>
+	<div class="navdiv">
+		<div class="wrap">
+			<nav>
+				<ul>
+					<li>
+						<c:choose>
+							<c:when test="${loginUser == null}">
+								<a href="${contextPath}/member/signup">회원가입</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${contextPath}/member/mypage">마이페이지</a>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					<li>
+						<c:choose>
+							<c:when test="${loginUser == null}">
+								<a href="${contextPath}/member/login">로그인</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${contextPath}/member/logout">로그아웃</a>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					<li><a href="${contextPath}/helpservice">고객센터</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</body>
+</html>

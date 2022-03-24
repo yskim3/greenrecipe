@@ -1,0 +1,47 @@
+-- table 설계 Tool
+
+-- table 설계 및 project ppt에 활용
+
+-- AQUERY TOOL
+
+-- https://aquerytool.com
+
+-- 방법
+
+-- 테이블 추가 click
+
+-- ERD 기본 정보 설정
+
+-- 데이터베이스 타입 : ORACLE
+
+-- ERD 이름 : ERD Diagram의 이름 작성
+
+-- 관계선 표기법 : IE 표기법
+
+-- 데이터베이스 이름 : DB명
+
+-- 수정 click
+
+-- 1개의 DB에 1개의 DB table이 생성됨
+
+-- Logical Name : 주석
+-- Table name : DB table명
+-- Name : column명
+-- Type : type (자료형)
+-- PK : Primary Key
+-- AL : Auto Increment (sequence)
+-- FK : Foreign Key
+-- Null : null
+
+-- SQL / Menu에서 테이블 생성 SQL click하면 table 생성 code 출력
+
+-- SQL / Menu에서 Java 모델 click하면 dto 생성 code 출력
+
+-- ERD은 기본적으로 논리 & 물리 모델 형태
+
+-- ERD에서 물리 모델 형태 click하면 실질적으로 만드는 table 형식
+
+-- Foreign Key 설정
+
+-- 1개의 table 추가해서
+-- Foreign Key 설정할 column이 있는 행을 drag해서 서로 연결 (FK 표시됨)

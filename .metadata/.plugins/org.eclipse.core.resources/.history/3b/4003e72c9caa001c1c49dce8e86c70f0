@@ -1,0 +1,20 @@
+# port
+server.port=8582
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+# database
+spring.datasource.driver-class-name = oracle.jdbc.OracleDriver
+spring.datasource.url = jdbc:oracle:thin:@localhost:1521:xe
+spring.datasource.username = hr
+spring.datasource.password = hr
+# mybatis
+# mybatis.config=mybatis-config.xml
+mybatis.config: com.greenrecipe.main.configuration
+mybatis.type-aliases-package: com.greenrecipe.main.**.dto
+mybatis.mapper-locations: mybatis/mappers/**/*.xml
+
+# database (hikari)
+# spring.datasource.hikari.driver-class-name=com.mysql.cj.jdbc.Driver
+# spring.datasource.hikari.jdbc-url=jdbc:mysql://localhost:1521/hr?characterEncoding=UTF-8&serverTimezone=UTC
+# spring.datasource.hikari.username=hr
+# spring.datasource.hikari.password=hr

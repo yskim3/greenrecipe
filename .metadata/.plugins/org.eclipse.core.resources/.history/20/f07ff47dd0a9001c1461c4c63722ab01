@@ -1,0 +1,20 @@
+package com.greenrecipe.main.mybatis.member;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+
+import com.greenrecipe.main.member.dto.BuyerDTO;
+
+@Mapper
+public interface MemberMapper {
+	
+	@Insert("INSERT INTO Message (content, type, timestamp, sender_id, channel_id) " +
+			"VALUE( #{context}, #{type}, #{timeStamp}, #{sender}, #{channel})")
+	
+	
+	public BuyerDTO buyerIdCheck(String buyer_id);
+	// public ArrayList<MemberDTO> memberInfo();
+	// public int register(MemberDTO dto);
+	// public void keepLogin(Map<String, Object> map);
+	// public BuyerDTO getUserSession(String sessionId);
+}

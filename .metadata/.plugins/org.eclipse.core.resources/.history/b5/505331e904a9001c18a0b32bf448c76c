@@ -1,0 +1,9 @@
+package com.greenrecipe.main.mybatis.member;
+
+public interface MemberMapper {
+	public MemberDTO getMember(String id);
+	public ArrayList<MemberDTO> memberInfo();
+	public int register(MemberDTO dto);
+	public void keepLogin(Map<String, Object> map);
+	public MemberDTO getUserSession(String sessionId);
+}
